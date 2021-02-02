@@ -1,0 +1,36 @@
+OutputFile: results/Fit_16_22.root
+NCPU: 4
+
+Turnon.N: 2
+
+
+Turnon.1.Name: Default
+Turnon.1.File: /eos/user/m/mkovac/Data/ECAL/EGamma/TnP_emulate_L1_16_22/201206_212936/0000TnP_emulate_L1_16_22.root
+Turnon.1.Tree: Ntuplizer/TagAndProbe
+Turnon.1.XVar: eleProbeSclEt
+Turnon.1.Cut: hasL1_40
+Turnon.1.SelectionVars: eleProbeEta
+Turnon.1.Selection: (abs(eleProbeEta) < 1.5 && isProbeLoose && sqrt(pow(eleProbeEta-eleTagEta,2)+pow(acos(cos(eleProbePhi-eleTagPhi)),2))>0.6)
+Turnon.1.Binning: 5., 20., 30., 32., 34., 38., 39., 40., 42., 45., 50., 60., 70., 100., 200., 300., 400., 600., 1000.
+Turnon.1.FitRange: 30 400
+Turnon.1.CB.Max: 1 1 1
+Turnon.1.CB.Alpha: 3 2 5
+Turnon.1.CB.N: 1.6 1 2
+Turnon.1.CB.Mean: 40.5 40 41
+Turnon.1.CB.Sigma: 1.8 1.6 2
+
+
+Turnon.2.Name: Emulated
+Turnon.2.File: /eos/user/m/mkovac/Data/ECAL/EGamma/TnP_emulate_L1_16_22/201206_212936/0000TnP_emulate_L1_16_22.root
+Turnon.2.Tree: Ntuplizer/TagAndProbe
+Turnon.2.XVar: eleProbeSclEt
+Turnon.2.Cut: hasL1Emu_40
+Turnon.2.SelectionVars: eleProbeEta
+Turnon.2.Selection: (abs(eleProbeEta) < 1.5 && isProbeLoose && sqrt(pow(eleProbeEta-eleTagEta,2)+pow(acos(cos(eleProbePhi-eleTagPhi)),2))>0.6)
+Turnon.2.Binning: 5., 20., 30., 32., 34., 38., 39., 40., 42., 45., 50., 60., 70., 100., 200., 300., 400., 600., 1000.
+Turnon.2.FitRange: 30 400
+Turnon.2.CB.Max: 1 1 1
+Turnon.2.CB.Alpha: 3 2 5
+Turnon.2.CB.N: 1.6 1 2
+Turnon.2.CB.Mean: 40.5 40 41
+Turnon.2.CB.Sigma: 1.8 1.6 2
