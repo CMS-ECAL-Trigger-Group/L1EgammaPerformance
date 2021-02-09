@@ -1,12 +1,12 @@
 # EGTagAndProbe
 Set of tools to evaluate L1EG trigger performance on T&P
 
-Forked from https://gitlab.cern.ch/ckoraka/EGTagAndProbe
+Taken from https://gitlab.cern.ch/ckoraka/EGTagAndProbe
 
-### Install instructions
+# Install instructions
 To run on 2018 data:
 Follow [L1 Trigger Emulator Stage 2 Upgrade Instructions](https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideL1TStage2Instructions)
-
+```
 cmsrel CMSSW_11_0_2
 cd CMSSW_11_0_2/src
 cmsenv
@@ -23,6 +23,7 @@ git clone https://github.com/cms-l1t-offline/L1Trigger-L1TCalorimeter.git L1Trig
 git cms-checkdeps -A -a
 
 scram b -j 8
+```
 
 Then clone the repository:
 ```
