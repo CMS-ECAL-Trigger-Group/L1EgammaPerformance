@@ -4,8 +4,7 @@ Set of tools to evaluate L1EG trigger performance on T&P
 Taken from https://gitlab.cern.ch/ckoraka/EGTagAndProbe
 
 # Install instructions
-To run on 2018 data:
-Follow [L1 Trigger Emulator Stage 2 Upgrade Instructions](https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideL1TStage2Instructions)
+To run on 2018 data follow L1 Trigger Emulator Stage 2 Upgrade Instructions located here [1], and also given bellow
 ```
 cmsrel CMSSW_11_0_2
 cd CMSSW_11_0_2/src
@@ -74,3 +73,5 @@ Create plotting script based on test/fitter/results/plot_EG_example.py
 cd results
 python plot_EG_example.py
 ```
+
+[1] https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideL1TStage2Instructions
