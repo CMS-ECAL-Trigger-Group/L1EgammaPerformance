@@ -19,8 +19,6 @@ git clone https://github.com/cms-l1t-offline/L1Trigger-L1TMuon.git L1Trigger/L1T
 git cms-addpkg L1Trigger/L1TCalorimeter
 git clone https://github.com/cms-l1t-offline/L1Trigger-L1TCalorimeter.git L1Trigger/L1TCalorimeter/data
 
-git cms-checkdeps -A -a
-
 scram b -j 8
 ```
 
@@ -29,7 +27,7 @@ Then clone the repository:
 git clone https://github.com/mkovac/L1EgammaPerformance.git
 scram b -j 4
 ```
-Now you have set up the work directory. You should go to the test/ directory and run scripts there. 
+Now you have set up the work directory. You should go to the L1EgammaPerformance/TagAndProbe/test directory and run scripts there. 
 
 
 ### Producing TagAndProbe ntuples with unpacked L1EG (no re-emulation)
