@@ -1,5 +1,5 @@
 # EGTagAndProbe
-Set of tools to evaluate L1EG trigger performance on T&P
+Set of tools to evaluate L1EG trigger performance on TnP
 
 Taken from https://gitlab.cern.ch/ckoraka/EGTagAndProbe
 
@@ -31,25 +31,24 @@ Now you have set up the work directory. You should go to the L1EgammaPerformance
 
 
 ### Producing TagAndProbe ntuples with unpacked L1EG (no re-emulation)
-Set flag isMC and isMINIAOD test.py, depending on what kind of dataset you are running on.
+- Set flag isMC and isMINIAOD in TnP_L1.py, depending on what kind of dataset you are running on.
 - HLT path used specified in python/MCAnalysis_cff.py (MC) or python/tagAndProbe_cff.py (data)
-Launch test.py
+- Launch TnP_L1.py
 
 ### Producing TagAndProbe ntuples with emulated L1EG
-reEmulL1.py is an example of cms pset file to run re-emulation on 2018 runC data.
 Here is a checklist of code you need to modify in order to run your desired process.
-+ Update electron ID to be exactly the same ones used in the data
-+ Make sure you use L1TReEmulFromRawsimEcalTP(process) instead of L1TReEmulFromRaw(process). Corresponding lines in reEmulL1.py are:
++ Update electron ID to be exactly the same ones used in the data.
++ Make sure you use L1TReEmulFromRawsimEcalTP(process) instead of L1TReEmulFromRaw(process). Corresponding lines in TnP_emulate_L1.py are:
 ```
 from L1Trigger.Configuration.customiseReEmul import L1TReEmulFromRAWsimEcalTP
 process = L1TReEmulFromRAWsimEcalTP(process)
 ```
 + Use the correct Calo parameters according to your run number. See [L1 Known Issues](https://twiki.cern.ch/twiki/bin/viewauth/CMS/L1KnownIssues#Calo). You can edit this in the line:```process.load("L1Trigger.L1TCalorimeter.caloParams_2018_v1_3_cfi")``` in the reEmulL1.py.
-+ Be sure to use the correct sqlite file (with extension .db) in your reEmulL1.py
++ Be sure to use the correct sqlite file (with extension .db) in your TnP_emulate_L1.py
 
 
 ### Submit job on the Grid
-Modify crab3_config.py: change requestName, inputDataSet, outLFNDirBase, outputDatasetTag, storageSite
+Modify Crab3_TnP_\*.py: change requestName, inputDataSet, outLFNDirBase, outputDatasetTag, storageSite
 ```
 cd CMSSW_9_4_0_pre3/src/EGTagAndProbe/EGTagAndProbe/test
 source /cvmfs/cms.cern.ch/crab3/crab.sh
