@@ -1,5 +1,5 @@
 # EGTagAndProbe
-Set of tools to evaluate L1EG trigger performance on T&P
+Set of tools to evaluate L1EG trigger performance on TnP
 
 Taken from https://gitlab.cern.ch/ckoraka/EGTagAndProbe
 
@@ -19,8 +19,6 @@ git clone https://github.com/cms-l1t-offline/L1Trigger-L1TMuon.git L1Trigger/L1T
 git cms-addpkg L1Trigger/L1TCalorimeter
 git clone https://github.com/cms-l1t-offline/L1Trigger-L1TCalorimeter.git L1Trigger/L1TCalorimeter/data
 
-git cms-checkdeps -A -a
-
 scram b -j 8
 ```
 
@@ -29,49 +27,49 @@ Then clone the repository:
 git clone https://github.com/mkovac/L1EgammaPerformance.git
 scram b -j 4
 ```
-Now you have set up the work directory. You should go to the test/ directory and run scripts there. 
+Now you have set up the work directory. You should go to the L1EgammaPerformance/TagAndProbe/test directory and run scripts there. 
 
 
 ### Producing TagAndProbe ntuples with unpacked L1EG (no re-emulation)
-Set flag isMC and isMINIAOD test.py, depending on what kind of dataset you are running on.
+- Set flag isMC and isMINIAOD in TnP_L1.py, depending on what kind of dataset you are running on.
 - HLT path used specified in python/MCAnalysis_cff.py (MC) or python/tagAndProbe_cff.py (data)
-Launch test.py
+- Launch TnP_L1.py
 
 ### Producing TagAndProbe ntuples with emulated L1EG
-reEmulL1.py is an example of cms pset file to run re-emulation on 2018 runC data.
 Here is a checklist of code you need to modify in order to run your desired process.
-+ Update electron ID to be exactly the same ones used in the data
-+ Make sure you use L1TReEmulFromRawsimEcalTP(process) instead of L1TReEmulFromRaw(process). Corresponding lines in reEmulL1.py are:
++ Update electron ID to be exactly the same ones used in the data.
++ Make sure you use L1TReEmulFromRawsimEcalTP(process) instead of L1TReEmulFromRaw(process). Corresponding lines in TnP_emulate_L1.py are:
 ```
 from L1Trigger.Configuration.customiseReEmul import L1TReEmulFromRAWsimEcalTP
 process = L1TReEmulFromRAWsimEcalTP(process)
 ```
-+ Use the correct Calo parameters according to your run number. See [L1 Known Issues](https://twiki.cern.ch/twiki/bin/viewauth/CMS/L1KnownIssues#Calo). You can edit this in the line:```process.load("L1Trigger.L1TCalorimeter.caloParams_2018_v1_3_cfi")``` in the reEmulL1.py.
-+ Be sure to use the correct sqlite file (with extension .db) in your reEmulL1.py
++ Use the correct Calo parameters according to your run number. See [L1 Known Issues](https://twiki.cern.ch/twiki/bin/viewauth/CMS/L1KnownIssues#Calo). You can edit this in the line:```process.load("L1Trigger.L1TCalorimeter.caloParams_2018_v1_3_cfi")``` in the TnP_emulate_L1.py.
++ Be sure to use the correct sqlite file (with extension .db) in your TnP_emulate_L1.py
 
 
 ### Submit job on the Grid
-Modify crab3_config.py: change requestName, inputDataSet, outLFNDirBase, outputDatasetTag, storageSite
+Modify Crab3_TnP_<>.py: change requestName, inputDataSet, outLFNDirBase, outputDatasetTag, storageSite
 ```
-cd CMSSW_9_4_0_pre3/src/EGTagAndProbe/EGTagAndProbe/test
+cd $CMSSW_BASE/src/L1EgammaPerformance/TagAndProbe/test
 source /cvmfs/cms.cern.ch/crab3/crab.sh
 voms-proxy-init -voms cms
-crab submit -c crab3_config.py
+crab submit -c Crab3_TnP_<>.py
 ```
 
 ### Producing turn-on plots
-Create configuration file based on test/fitter/run/stage2_turnOnEG_fitter_test.par
+Create configuration file based on $CMSSW_BASE/src/L1EgammaPerformance/TagAndProbe/test/fitter/run/Parameters_16_16.par
 ```
-cd CMSSW_9_4_0_pre3/src/EGTagAndProbe/EGTagAndProbe/test/fitter
-make clean; make
-./fit.exe run/stage2_turnOnEG_fitter_test.par
+cd $CMSSW_BASE/src/L1EgammaPerformance/TagAndProbe/test/fitter
+make clean
+make
+./fit.exe run/Parameters_16_16.par
 ```
 Note that you need to modify the input file location in the .par file.
 
-Create plotting script based on test/fitter/results/plot_EG_example.py
+Create plotting script based on $CMSSW_BASE/src/L1EgammaPerformance/TagAndProbe/test/fitter/results/plot_EG_16_16.py
 ```
-cd results
-python plot_EG_example.py
+cd $CMSSW_BASE/src/L1EgammaPerformance/TagAndProbe/test/fitter/results
+python plot_EG_16_16.py
 ```
 
 [1] https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideL1TStage2Instructions
