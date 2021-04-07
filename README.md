@@ -43,32 +43,33 @@ Here is a checklist of code you need to modify in order to run your desired proc
 from L1Trigger.Configuration.customiseReEmul import L1TReEmulFromRAWsimEcalTP
 process = L1TReEmulFromRAWsimEcalTP(process)
 ```
-+ Use the correct Calo parameters according to your run number. See [L1 Known Issues](https://twiki.cern.ch/twiki/bin/viewauth/CMS/L1KnownIssues#Calo). You can edit this in the line:```process.load("L1Trigger.L1TCalorimeter.caloParams_2018_v1_3_cfi")``` in the reEmulL1.py.
++ Use the correct Calo parameters according to your run number. See [L1 Known Issues](https://twiki.cern.ch/twiki/bin/viewauth/CMS/L1KnownIssues#Calo). You can edit this in the line:```process.load("L1Trigger.L1TCalorimeter.caloParams_2018_v1_3_cfi")``` in the TnP_emulate_L1.py.
 + Be sure to use the correct sqlite file (with extension .db) in your TnP_emulate_L1.py
 
 
 ### Submit job on the Grid
-Modify Crab3_TnP_\*.py: change requestName, inputDataSet, outLFNDirBase, outputDatasetTag, storageSite
+Modify Crab3_TnP_<>.py: change requestName, inputDataSet, outLFNDirBase, outputDatasetTag, storageSite
 ```
-cd CMSSW_9_4_0_pre3/src/EGTagAndProbe/EGTagAndProbe/test
+cd $CMSSW_BASE/src/L1EgammaPerformance/TagAndProbe/test
 source /cvmfs/cms.cern.ch/crab3/crab.sh
 voms-proxy-init -voms cms
-crab submit -c crab3_config.py
+crab submit -c Crab3_TnP_<>.py
 ```
 
 ### Producing turn-on plots
-Create configuration file based on test/fitter/run/stage2_turnOnEG_fitter_test.par
+Create configuration file based on $CMSSW_BASE/src/L1EgammaPerformance/TagAndProbe/test/fitter/run/Parameters_16_16.par
 ```
-cd CMSSW_9_4_0_pre3/src/EGTagAndProbe/EGTagAndProbe/test/fitter
-make clean; make
-./fit.exe run/stage2_turnOnEG_fitter_test.par
+cd $CMSSW_BASE/src/L1EgammaPerformance/TagAndProbe/test/fitter
+make clean
+make
+./fit.exe run/Parameters_16_16.par
 ```
 Note that you need to modify the input file location in the .par file.
 
-Create plotting script based on test/fitter/results/plot_EG_example.py
+Create plotting script based on $CMSSW_BASE/src/L1EgammaPerformance/TagAndProbe/test/fitter/results/plot_EG_16_16.py
 ```
-cd results
-python plot_EG_example.py
+cd $CMSSW_BASE/src/L1EgammaPerformance/TagAndProbe/test/fitter/results
+python plot_EG_16_16.py
 ```
 
 [1] https://twiki.cern.ch/twiki/bin/view/CMSPublic/SWGuideL1TStage2Instructions
