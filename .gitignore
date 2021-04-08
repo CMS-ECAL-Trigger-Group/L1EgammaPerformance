@@ -1,0 +1,10 @@
+__init__.py
+*.pyc
+*.root
+*.so
+*.pdf
+*.zip
+*.log
+*.pcm
+fit.exe
+*~
