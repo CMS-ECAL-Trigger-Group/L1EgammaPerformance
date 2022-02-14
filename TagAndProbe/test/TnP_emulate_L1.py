@@ -117,7 +117,9 @@ if not isMC: # will use 80X
 #	        )
 	        )
        
-    process.load('EGTagAndProbe.EGTagAndProbe.tagAndProbe_cff')
+    #process.load('EGTagAndProbe.EGTagAndProbe.tagAndProbe_cff')
+    process.load('L1EgammaPerformance.TagAndProbe.tagAndProbe_cff')
+	
     
     process.source = cms.Source("PoolSource",
         fileNames = cms.untracked.vstring
@@ -207,7 +209,7 @@ process.load("L1Trigger.L1TCalorimeter.caloParams_2018_v1_3_cfi")
 #### the following are dummy defaults, so that one can normally use the config changing file list by hand etc.
 
 if options.JSONfile:
-    print "Using JSON: " , options.JSONfile
+    print("Using JSON: " , options.JSONfile)
     process.source.lumisToProcess = LumiList.LumiList(filename = options.JSONfile).getVLuminosityBlockRange()
 
 if options.inputFiles:

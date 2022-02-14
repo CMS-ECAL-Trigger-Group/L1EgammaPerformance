@@ -5,8 +5,8 @@ Turnon.N: 2
 
 
 Turnon.1.Name: Default
-Turnon.1.File: /eos/user/m/mkovac/Data/ECAL/EGamma/TnP_emulate_L1_16_16/201126_222602/0000/TnP_emulate_L1_16_16.root
-#Turnon.1.File: /eos/user/m/mkovac/Data/ECAL/EGamma/TnP_emulate_L1_16_16/201023_104051/0000/TnP_emulate_L1_16_16.root
+#Turnon.1.File: /eos/user/m/mkovac/Data/ECAL/EGamma/TnP_emulate_L1_16_16/201126_222602/0000/TnP_emulate_L1_16_16.root
+Turnon.1.File: /afs/cern.ch/work/a/atishelm/private/Test_L1/CMSSW_11_0_2/src/L1EgammaPerformance/TagAndProbe/TnP_L1_numEvent1000.root
 Turnon.1.Tree: Ntuplizer/TagAndProbe
 Turnon.1.XVar: eleProbeSclEt
 Turnon.1.Cut: hasL1_40
@@ -22,8 +22,9 @@ Turnon.1.CB.Sigma: 1.8 1.6 2
 
 
 Turnon.2.Name: Emulated
-Turnon.2.File: /eos/user/m/mkovac/Data/ECAL/EGamma/TnP_emulate_L1_16_16/201126_222602/0000/TnP_emulate_L1_16_16.root
+#Turnon.2.File: /eos/user/m/mkovac/Data/ECAL/EGamma/TnP_emulate_L1_16_16/201126_222602/0000/TnP_emulate_L1_16_16.root
 #Turnon.2.File: /eos/user/m/mkovac/Data/ECAL/EGamma/TnP_emulate_L1_16_16/201023_104051/0000/TnP_emulate_L1_16_16.root
+Turnon.2.File: /afs/cern.ch/work/a/atishelm/private/Test_L1/CMSSW_11_0_2/src/L1EgammaPerformance/TagAndProbe/TnP_L1_numEvent1000.root
 Turnon.2.Tree: Ntuplizer/TagAndProbe
 Turnon.2.XVar: eleProbeSclEt
 Turnon.2.Cut: hasL1Emu_40

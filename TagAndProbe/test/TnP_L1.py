@@ -78,7 +78,8 @@ egmGsfElectronIDSequence = cms.Sequence(egmGsfElectronIDTask)
 if not isMC:
     from Configuration.AlCa.autoCond import autoCond
     process.GlobalTag.globaltag = '101X_dataRun2_Prompt_v11'
-    process.load('EGTagAndProbe.EGTagAndProbe.tagAndProbe_cff')
+    # process.load('EGTagAndProbe.EGTagAndProbe.tagAndProbe_cff')
+    process.load('L1EgammaPerformance.TagAndProbe.tagAndProbe_cff')
     process.source = cms.Source("PoolSource",
         fileNames = cms.untracked.vstring('/store/data/Run2018C/EGamma/MINIAOD/PromptReco-v1/000/319/349/00000/F086E433-3385-E811-B7F8-FA163E89BD00.root'),
     )
@@ -103,7 +104,7 @@ if isMINIAOD:
     process.Ntuplizer.Vertices = cms.InputTag("offlineSlimmedPrimaryVertices")
 
 if options.JSONfile:
-    print "Using JSON: " , options.JSONfile
+    print("Using JSON: " , options.JSONfile)
     process.source.lumisToProcess = LumiList.LumiList(filename = options.JSONfile).getVLuminosityBlockRange()
 
 if options.inputFiles:
