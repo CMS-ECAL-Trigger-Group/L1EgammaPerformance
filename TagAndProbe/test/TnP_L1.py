@@ -27,7 +27,7 @@ options.register ('JSONfile',
                   
 options.outputFile = 'TnP_L1.root'
 options.inputFiles = []
-options.maxEvents  = 1000
+options.maxEvents  = 10000
 options.parseArguments()
 
 

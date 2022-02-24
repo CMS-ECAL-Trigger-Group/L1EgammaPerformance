@@ -7,18 +7,17 @@ process = cms.Process("TagAndProbe", eras.Run2_2018)
 
 isMC = False
 isMINIAOD = True
+# isMINIAOD = False
 
 process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
 process.load('Configuration.StandardSequences.RawToDigi_Data_cff')
 process.load('Configuration.StandardSequences.EndOfProcess_cff')
-process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 process.load('Configuration.StandardSequences.Services_cff')
 process.load('SimGeneral.HepPDTESSource.pythiapdt_cfi')
 process.load('FWCore.MessageService.MessageLogger_cfi')
 process.load('Configuration.EventContent.EventContent_cff')
 process.load('Configuration.StandardSequences.GeometryRecoDB_cff')
 process.load('Configuration.StandardSequences.MagneticField_AutoFromDBCurrent_cff')
-
 
 options = VarParsing.VarParsing ('analysis')
 options.register ('secondaryFilesList','',VarParsing.VarParsing.multiplicity.singleton,VarParsing.VarParsing.varType.string,  "List of secondary input files")
@@ -37,7 +36,7 @@ options.register ('JSONfile',
                   
 options.outputFile = 'TnP_emulate_L1.root'
 options.inputFiles = []
-options.maxEvents  = -999
+options.maxEvents  = 1000
 
 options.parseArguments()
 
@@ -122,23 +121,52 @@ if not isMC: # will use 80X
 	
     
     process.source = cms.Source("PoolSource",
-        fileNames = cms.untracked.vstring
-        (
-        	'/store/data/Run2018C/EGamma/MINIAOD/PromptReco-v1/000/319/349/00000/F086E433-3385-E811-B7F8-FA163E89BD00.root'
+
+
+        fileNames = cms.untracked.vstring(
+            '/store/data/Run2018C/EGamma/MINIAOD/UL2018_MiniAODv2-v1/270000/DFED1F4D-854D-0F45-A50A-A6E352DCC4D6.root'
         ),
-		secondaryFileNames = cms.untracked.vstring
-		(
-			'/store/data/Run2018C/EGamma/RAW/v1/000/319/349/00000/245CA228-1083-E811-BEE5-FA163E0F5CB9.root',
-			'/store/data/Run2018C/EGamma/RAW/v1/000/319/349/00000/40114D2F-1083-E811-B2FE-FA163E002F6D.root',
-			'/store/data/Run2018C/EGamma/RAW/v1/000/319/349/00000/465CC3A5-1383-E811-929E-FA163EA1695D.root',
-			'/store/data/Run2018C/EGamma/RAW/v1/000/319/349/00000/7291B6B7-1183-E811-B958-FA163ED411AD.root',
-			'/store/data/Run2018C/EGamma/RAW/v1/000/319/349/00000/7A31B34A-1683-E811-B28D-02163E01A179.root',
-			'/store/data/Run2018C/EGamma/RAW/v1/000/319/349/00000/4EC231C6-1183-E811-9B59-FA163EF57FC8.root',
-			'/store/data/Run2018C/EGamma/RAW/v1/000/319/349/00000/AA72A78D-1383-E811-A20A-FA163E157685.root',
-			'/store/data/Run2018C/EGamma/RAW/v1/000/319/349/00000/A0B073E4-1683-E811-978B-FA163EF9E3D8.root',
-			'/store/data/Run2018C/EGamma/RAW/v1/000/319/349/00000/C65B23C3-1683-E811-A826-FA163E3FF064.root',
-			'/store/data/Run2018C/EGamma/RAW/v1/000/319/349/00000/20CBD470-1183-E811-ABC5-FA163E0D4D44.root'
-		)
+        secondaryFileNames = cms.untracked.vstring(
+                '/store/data/Run2018C/EGamma/RAW/v1/000/320/065/00000/AC7E6A2C-028E-E811-8DFE-FA163EAEA068.root',
+                '/store/data/Run2018C/EGamma/RAW/v1/000/320/065/00000/ACBAD534-028E-E811-8932-FA163E89B4C8.root',
+                '/store/data/Run2018C/EGamma/RAW/v1/000/320/065/00000/02569CFF-018E-E811-A041-FA163E4E857F.root',
+                '/store/data/Run2018C/EGamma/RAW/v1/000/320/065/00000/581D6BE6-018E-E811-98F8-FA163E5CA922.root',
+                '/store/data/Run2018C/EGamma/RAW/v1/000/320/065/00000/4284B540-028E-E811-9DD8-FA163EC4473D.root',
+                '/store/data/Run2018C/EGamma/RAW/v1/000/320/065/00000/6696951B-028E-E811-A980-FA163E6011FE.root',
+                '/store/data/Run2018C/EGamma/RAW/v1/000/320/065/00000/0C8467BC-008E-E811-9239-FA163ED6DF53.root',
+                '/store/data/Run2018C/EGamma/RAW/v1/000/320/065/00000/48B094CB-018E-E811-B4AE-FA163E1190B1.root',
+                '/store/data/Run2018C/EGamma/RAW/v1/000/320/065/00000/54977885-028E-E811-82A3-FA163ED1752B.root',
+                '/store/data/Run2018C/EGamma/RAW/v1/000/320/065/00000/5A855411-068E-E811-B414-FA163E5F5EFC.root'
+            )
+
+
+        # fileNames = cms.untracked.vstring
+        # (
+        # 	# '/store/data/Run2018C/EGamma/MINIAOD/PromptReco-v1/000/319/349/00000/F086E433-3385-E811-B7F8-FA163E89BD00.root'
+        # 	# '/store/data/Run2018C/EGamma/MINIAOD/PromptReco-v1/000/319/349/00000/F086E433-3385-E811-B7F8-FA163E89BD00.root'
+		# 	# '/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/E8F0B714-328E-E811-96E6-FA163E4F129E.root'
+		# 	# '/store/data/Run2018C/EGamma/MINIAOD/PromptReco-v1/000/319/347/00000/7A21CBB0-BF84-E811-A2AF-02163E013E33.root'
+	
+
+        # ),
+
+		# secondaryFileNames = cms.untracked.vstring
+		# (
+			
+		# 	# '/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/E8F0B714-328E-E811-96E6-FA163E4F129E.root'
+		# 	# '/store/data/Run2018C/ZeroBias/RAW/v1/000/320/065/00000/E8F0B714-328E-E811-96E6-FA163E4F129E.root'
+		# 	# '/store/data/Run2018C/EGamma/RAW/v1/000/319/349/00000/245CA228-1083-E811-BEE5-FA163E0F5CB9.root',
+		# 	# '/store/data/Run2018C/EGamma/RAW/v1/000/319/349/00000/40114D2F-1083-E811-B2FE-FA163E002F6D.root',
+		# 	# '/store/data/Run2018C/EGamma/RAW/v1/000/319/349/00000/465CC3A5-1383-E811-929E-FA163EA1695D.root',
+		# 	# '/store/data/Run2018C/EGamma/RAW/v1/000/319/349/00000/7291B6B7-1183-E811-B958-FA163ED411AD.root',
+		# 	# '/store/data/Run2018C/EGamma/RAW/v1/000/319/349/00000/7A31B34A-1683-E811-B28D-02163E01A179.root',
+		# 	# '/store/data/Run2018C/EGamma/RAW/v1/000/319/349/00000/4EC231C6-1183-E811-9B59-FA163EF57FC8.root',
+		# 	# '/store/data/Run2018C/EGamma/RAW/v1/000/319/349/00000/AA72A78D-1383-E811-A20A-FA163E157685.root',
+		# 	# '/store/data/Run2018C/EGamma/RAW/v1/000/319/349/00000/A0B073E4-1683-E811-978B-FA163EF9E3D8.root',
+		# 	# '/store/data/Run2018C/EGamma/RAW/v1/000/319/349/00000/C65B23C3-1683-E811-A826-FA163E3FF064.root',
+		# 	# '/store/data/Run2018C/EGamma/RAW/v1/000/319/349/00000/20CBD470-1183-E811-ABC5-FA163E0D4D44.root'
+		# )
+
     	)
 else:
     process.GlobalTag.globaltag = '106X_mcRun2_asymptotic_preVFP_v5'
@@ -150,6 +178,7 @@ else:
 #			'/store/relval/CMSSW_10_6_8/RelValZEE_13UP16/MINIAODSIM/PU25ns_106X_mcRun2_asymptotic_preVFP_v5_UL16hltval_preVFP_v5-v1/10000/8943C7FE-7326-D64E-9D54-B4FB6EE9229D.root',
 #			'/store/relval/CMSSW_10_6_8/RelValZEE_13UP16/MINIAODSIM/PU25ns_106X_mcRun2_asymptotic_preVFP_v5_UL16hltval_preVFP_v5-v1/10000/362B166F-348C-1948-B1BB-F26AEABED9FB.root'
         ),
+
        secondaryFileNames = cms.untracked.vstring(
 		'/store/relval/CMSSW_10_6_8/RelValZEE_13UP16/GEN-SIM-RAW/PU25ns_80X_mcRun2_asymptotic_v20_UL16hltval_preVFP_v5-v1/10000/A255DD0A-714F-EA11-BCEB-0CC47A4D75EC.root',
 		'/store/relval/CMSSW_10_6_8/RelValZEE_13UP16/GEN-SIM-RAW/PU25ns_80X_mcRun2_asymptotic_v20_UL16hltval_preVFP_v5-v1/10000/00FDEC5B-4C4F-EA11-8B31-0025905B85D6.root',
@@ -177,6 +206,7 @@ else:
 		'/store/relval/CMSSW_10_6_8/RelValZEE_13UP16/GEN-SIM-RAW/PU25ns_80X_mcRun2_asymptotic_v20_UL16hltval_preVFP_v5-v1/10000/8E11FA7C-624F-EA11-9696-0CC47A7C35D8.root',
 		'/store/relval/CMSSW_10_6_8/RelValZEE_13UP16/GEN-SIM-RAW/PU25ns_80X_mcRun2_asymptotic_v20_UL16hltval_preVFP_v5-v1/10000/B4732519-6D4F-EA11-867E-0025905B85AE.root'
 	)
+
     )
     process.Ntuplizer.useHLTMatch = cms.bool(False) #In case no HLT object in MC sample considered or you're fed up with trying to find the right HLT collections
 
@@ -237,8 +267,8 @@ process.p = cms.Path (
 process.schedule = cms.Schedule(process.p) # do my sequence pls
 
 # Silence output
-process.load("FWCore.MessageService.MessageLogger_cfi")
-process.MessageLogger.cerr.FwkReport.reportEvery = 10
+#process.load("FWCore.MessageService.MessageLogger_cfi")
+#process.MessageLogger.cerr.FwkReport.reportEvery = 10
 
 # Adding ntuplizer
 process.TFileService=cms.Service('TFileService',fileName=cms.string(options.outputFile))
